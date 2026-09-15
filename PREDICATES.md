@@ -54,8 +54,8 @@ Let $F_E$ be the oriented rectangular footprint of entity $E$. The free-space cl
 
 $$
 \begin{aligned}
-d_{fs}(S,O)&=\operatorname{dist}(F_S,F_O),\\
-A_\cap(S,O)&=\operatorname{area}(F_S\cap F_O).
+d_{fs}(S,O)&=\mathrm{dist}(F_S,F_O),\\
+A_\cap(S,O)&=\mathrm{area}(F_S\cap F_O).
 \end{aligned}
 $$
 
@@ -66,7 +66,7 @@ $$
     =[\Delta v_x,\Delta v_y]^\top.
 $$
 
-The operator $\operatorname{wrap}(\alpha)$ maps an angle to $[-\pi,\pi)$. For temporal predicates, $k$ indexes an observation and $t_k$ denotes its timestamp. Dataset-specific timestamps are normalised to seconds before predicate evaluation, such that
+The operator $\mathrm{wrap}(\alpha)$ maps an angle to $[-\pi,\pi)$. For temporal predicates, $k$ indexes an observation and $t_k$ denotes its timestamp. Dataset-specific timestamps are normalised to seconds before predicate evaluation, such that
 
 $$
 \Delta t_k=t_k-t_{k-1}
@@ -163,12 +163,9 @@ $$
 #### `veryNear` and `near`
 
 $$
-\begin{aligned}
-\texttt{veryNear}(S,O)
-&\mathrel{:\!\Leftrightarrow}0<d_{fs}(S,O)\leq2\,\mathrm{m},\\
-\texttt{near}(S,O)
-&\mathrel{:\!\Leftrightarrow}2<d_{fs}(S,O)\leq5\,\mathrm{m}.
-\end{aligned}
+\texttt{veryNear}(S,O)\mathrel{:\!\Leftrightarrow}0<d_{fs}(S,O)\leq2\,\mathrm{m},
+\qquad
+\texttt{near}(S,O)\mathrel{:\!\Leftrightarrow}2<d_{fs}(S,O)\leq5\,\mathrm{m}.
 $$
 
 The four distance/contact states are mutually exclusive.
@@ -265,7 +262,7 @@ When $v_E\geq0.75\,\mathrm{m/s}$, the velocity heading is
 
 $$
 \theta_E^v=
-    \operatorname{wrap}\!\left(\operatorname{atan2}(v_y,v_x)\right).
+    \mathrm{wrap}\!\left(\mathrm{atan2}(v_y,v_x)\right).
 $$
 
 Below this speed the velocity direction is considered insufficiently stable and the predicate is not emitted.
@@ -285,7 +282,7 @@ When both participants have effective travel headings,
 $$
 \Delta\theta^{travel}_{SO} =
 \left|
-\operatorname{wrap}
+\mathrm{wrap}
 (\theta_O^{travel}-\theta_S^{travel})
 \right|.
 $$
@@ -307,7 +304,7 @@ For two instances of the same persistent track,
 $$
 \begin{aligned}
 \texttt{precedes}(E_{k-1},E_k)\mathrel{:\!\Leftrightarrow}{}&
-\operatorname{sameTrack}(E_{k-1},E_k)\\
+\mathrm{sameTrack}(E_{k-1},E_k)\\
 &\land\,0<\Delta t_k\leq0.75\,\mathrm{s}.
 \end{aligned}
 $$
@@ -326,7 +323,7 @@ $$
 
 $$
 \Delta\theta_k
-    =\operatorname{wrap}(\theta_k-\theta_{k-1}).
+    =\mathrm{wrap}(\theta_k-\theta_{k-1}).
 $$
 
 #### `hasSpeedChangeFromPrevious`
@@ -349,7 +346,7 @@ When $d_k^{disp}\geq0.40\,\mathrm{m}$,
 
 $$
 \theta_k^{disp} =
-\operatorname{atan2}(y_k-y_{k-1},x_k-x_{k-1}).
+\mathrm{atan2}(y_k-y_{k-1},x_k-x_{k-1}).
 $$
 
 #### `hasObservedFrameCount` and `hasObservedDuration`
@@ -398,8 +395,8 @@ Let $M$ denote an HD-map polygon and let
 
 $$
 \rho(E,M) =
-\frac{\operatorname{area}(F_E\cap M)}
-     {\operatorname{area}(F_E)}
+\frac{\mathrm{area}(F_E\cap M)}
+     {\mathrm{area}(F_E)}
 $$
 
 be footprint overlap. Primary-map matching uses exact unbuffered map geometry. A candidate must contain the entity center or provide sufficient footprint overlap. The primary-map configuration uses a minimum overlap ratio $0.20$, an ambiguity margin $0.05$, and a lateral tie-break margin $0.50\,\mathrm{m}$.
@@ -410,8 +407,8 @@ Center-membership predicates are denoted below by $I_L$ and $I_C$, respectively:
 
 $$
 \begin{aligned}
-I_L(E,L)&\mathrel{:\!\Leftrightarrow}\mathbf{p}_E\in\operatorname{polygon}(L),\\
-I_C(E,C)&\mathrel{:\!\Leftrightarrow}\mathbf{p}_E\in\operatorname{polygon}(C).
+I_L(E,L)&\mathrel{:\!\Leftrightarrow}\mathbf{p}_E\in\mathrm{polygon}(L),\\
+I_C(E,C)&\mathrel{:\!\Leftrightarrow}\mathbf{p}_E\in\mathrm{polygon}(C).
 \end{aligned}
 $$
 
@@ -421,8 +418,8 @@ Writing $J_L$ and $J_C$ for the corresponding footprint-intersection predicates,
 
 $$
 \begin{aligned}
-J_L(E,L)&\mathrel{:\!\Leftrightarrow}\operatorname{area}(F_E\cap L)>0,\\
-J_C(E,C)&\mathrel{:\!\Leftrightarrow}\operatorname{area}(F_E\cap C)>0.
+J_L(E,L)&\mathrel{:\!\Leftrightarrow}\mathrm{area}(F_E\cap L)>0,\\
+J_C(E,C)&\mathrel{:\!\Leftrightarrow}\mathrm{area}(F_E\cap C)>0.
 \end{aligned}
 $$
 
@@ -435,7 +432,7 @@ These predicates store the unique conservative primary lane $L^{*}$ or lane conn
 For the selected primary primitive $M^{*}$,
 
 $$
-\rho_E^{*}=\rho(E,M^{*}).
+\rho_E^\ast = \rho(E, M^\ast).
 $$
 
 #### `hasAmbiguousMapMatch`
@@ -467,7 +464,7 @@ Positive values lie left of the directed baseline.
 Stores the local legal travel direction
 
 $$
-\theta_E^{map}=\operatorname{wrap}(\theta_b).
+\theta_E^{map}=\mathrm{wrap}(\theta_b).
 $$
 
 #### `hasBaselineCurvature`
@@ -492,8 +489,8 @@ Writing $I_{int}$ and $J_{int}$ for center and footprint intersection,
 
 $$
 \begin{aligned}
-I_{int}(E,I)&\mathrel{:\!\Leftrightarrow}\mathbf{p}_E\in\operatorname{polygon}(I),\\
-J_{int}(E,I)&\mathrel{:\!\Leftrightarrow}\operatorname{area}(F_E\cap I)>0.
+I_{int}(E,I)&\mathrel{:\!\Leftrightarrow}\mathbf{p}_E\in\mathrm{polygon}(I),\\
+J_{int}(E,I)&\mathrel{:\!\Leftrightarrow}\mathrm{area}(F_E\cap I)>0.
 \end{aligned}
 $$
 
@@ -507,8 +504,8 @@ Writing $I_{cw}$ and $J_{cw}$ for center and footprint crosswalk membership,
 
 $$
 \begin{aligned}
-I_{cw}(E,CW)&\mathrel{:\!\Leftrightarrow}\mathbf{p}_E\in\operatorname{polygon}(CW),\\
-J_{cw}(E,CW)&\mathrel{:\!\Leftrightarrow}\operatorname{area}(F_E\cap CW)>0.
+I_{cw}(E,CW)&\mathrel{:\!\Leftrightarrow}\mathbf{p}_E\in\mathrm{polygon}(CW),\\
+J_{cw}(E,CW)&\mathrel{:\!\Leftrightarrow}\mathrm{area}(F_E\cap CW)>0.
 \end{aligned}
 $$
 
@@ -537,11 +534,10 @@ If $O$ lies downstream on an accepted direct/connected successor path, the remai
 #### `inSameLaneAs`
 
 $$
-\begin{aligned}
-\texttt{inSameLaneAs}(S,O)\mathrel{:\!\Leftrightarrow}{}&
-L_S^{*}=L_O^{*}\\
-&\land\neg A_S^{map}\land\neg A_O^{map},
-\end{aligned}
+\texttt{inSameLaneAs}(S,O)\mathrel{:\!\Leftrightarrow}
+L_S^\ast=L_O^\ast
+\land \neg A_S^{map}
+\land \neg A_O^{map}.
 $$
 
 where $A_E^{map}$ is the map-ambiguity flag. Travel-direction agreement is not required by this predicate.
@@ -599,23 +595,19 @@ $\mathcal F_{\mathrm{veh}}$ requires compatible motor-vehicle participants. $\ma
 For moving traffic,
 
 $$
-\begin{aligned}
-\mathcal F_{\mathrm{move}}\mathrel{:\!\Leftrightarrow}{}&
-v_S^{path}>0.30\,\mathrm{m/s}\\
-&\land 0<g_{SO}/v_S^{path}\leq5.0\,\mathrm{s}\\
-&\land g_{SO}\leq80\,\mathrm{m},
-\end{aligned}
+\mathcal F_{\mathrm{move}}\mathrel{:\!\Leftrightarrow}
+v_S^{path}>0.30\,\mathrm{m/s}
+\land 0<g_{SO}/v_S^{path}\leq5.0\,\mathrm{s}
+\land g_{SO}\leq80\,\mathrm{m}.
 $$
 
 where $v_S^{path}$ is the subject velocity projected onto the directed path. For stop-and-go traffic,
 
 $$
-\begin{aligned}
-\mathcal F_{\mathrm{queue}}\mathrel{:\!\Leftrightarrow}{}&
-v_S^{path}\leq2.0\,\mathrm{m/s}\\
-&\land v_O^{path}\leq4.0\,\mathrm{m/s}\\
-&\land 0<g_{SO}\leq12\,\mathrm{m}.
-\end{aligned}
+\mathcal F_{\mathrm{queue}}\mathrel{:\!\Leftrightarrow}
+v_S^{path}\leq2.0\,\mathrm{m/s}
+\land v_O^{path}\leq4.0\,\mathrm{m/s}
+\land 0<g_{SO}\leq12\,\mathrm{m}.
 $$
 
 Finally,
@@ -672,8 +664,8 @@ $$
 \begin{aligned}
 \mathcal L_{\mathrm{trans}}\mathrel{:\!\Leftrightarrow}{}&
 C_s\neq C_t
-\land\operatorname{Adjacent}(C_s,C_t)\\
-&\land\neg\operatorname{Continuation}(C_s,C_t).
+\land\mathrm{Adjacent}(C_s,C_t)\\
+&\land\neg\mathrm{Continuation}(C_s,C_t).
 \end{aligned}
 $$
 
@@ -710,48 +702,39 @@ where $s_{\mathrm{LC}}$ is the deterministic event score, $C_{\mathrm{completion
 Let $T$ denote the target stream of an already decoded lane change. The shared merge condition is
 
 $$
-\begin{aligned}
-\mathcal M_{\mathrm{base}}(S,O,T)\mathrel{:\!\Leftrightarrow}{}&
+\mathcal M_{\mathrm{base}}(S,O,T)\mathrel{:\!\Leftrightarrow}
 \texttt{changesLane}(S,T)
-\land\mathcal M_{\mathrm{pre}}\\
-&\land\mathcal M_{\mathrm{path}}
-\land\mathcal M_{\mathrm{flow}}
-\land\mathcal M_{\mathrm{stable}} .
-\end{aligned}
+\land \mathcal M_{\mathrm{pre}}
+\land \mathcal M_{\mathrm{path}}
+\land \mathcal M_{\mathrm{flow}}
+\land \mathcal M_{\mathrm{stable}}.
 $$
 
 $\mathcal M_{\mathrm{pre}}$ requires $O$ to be present in the target stream before entry, using a $2.0\,\mathrm{s}$ pre-existence window and at least one supporting frame. $\mathcal M_{\mathrm{path}}$ requires target-path overlap at least $0.20$ and at most six topology hops. $\mathcal M_{\mathrm{flow}}$ requires travel-direction difference at most $0.55\,\mathrm{rad}$. $\mathcal M_{\mathrm{stable}}$ requires stable order for at least two frames within a $2.0\,\mathrm{s}$ confirmation window.
 
-Let $O_{\mathrm{rear}}^{*}$ and $O_{\mathrm{front}}^{*}$ be the nearest valid target-stream neighbors behind and ahead of $S$. Then
+Let $O_{\mathrm{rear}}^\ast$ and $O_{\mathrm{front}}^\ast$ be the nearest valid target-stream neighbors behind and ahead of $S$. Then
 
 $$
-\begin{aligned}
-&\texttt{mergesInFrontOf}(S,O)\\
-&\quad\mathrel{:\!\Leftrightarrow}
+\texttt{mergesInFrontOf}(S,O)\mathrel{:\!\Leftrightarrow}
 \mathcal M_{\mathrm{base}}(S,O,T)
-\land S\succ_T O\\
-&\qquad\land O=O_{\mathrm{rear}}^{*}
-\land0<g_{SO}\leq40\,\mathrm{m}\\
-&\qquad\land h_{\mathrm{rear}}\leq5.0\,\mathrm{s},
-\end{aligned}
+\land S\succ_T O
+\land O=O_{\mathrm{rear}}^\ast
+\land 0<g_{SO}\leq40\,\mathrm{m}
+\land h_{\mathrm{rear}}\leq5.0\,\mathrm{s}.
 $$
 
 and
 
 $$
-\begin{aligned}
-&\texttt{mergesBehind}(S,O)\\
-&\quad\mathrel{:\!\Leftrightarrow}
+\texttt{mergesBehind}(S,O)\mathrel{:\!\Leftrightarrow}
 \mathcal M_{\mathrm{base}}(S,O,T)
-\land S\prec_T O\\
-&\qquad\land O=O_{\mathrm{front}}^{*}
-\land0<g_{SO}\leq40\,\mathrm{m}\\
-&\qquad\land h_{\mathrm{front}}\leq5.0\,\mathrm{s}.
-\end{aligned}
+\land S\prec_T O
+\land O=O_{\mathrm{front}}^\ast
+\land 0<g_{SO}\leq40\,\mathrm{m}
+\land h_{\mathrm{front}}\leq5.0\,\mathrm{s}.
 $$
 
 Here $S\succ_T O$ and $S\prec_T O$ denote stable ahead/behind order on the target path, and $h$ is the corresponding post-merge headway when defined.
-
 ### `crossesInFrontOf`
 
 Let $\mathbf d_S$ and $\mathbf d_O$ be unit vectors along the current headings. The two finite forward rays are
@@ -942,8 +925,8 @@ $$
 \begin{aligned}
 &\texttt{isRelevantSignal}(a,s)\\
 &\quad\mathrel{:\!\Leftrightarrow}\exists m:\texttt{controls}(s,m)\\
-&\qquad\land\operatorname{approaches}(a,m,t)\\
-&\qquad\land\neg\operatorname{occupies}(a,m,t).
+&\qquad\land\mathrm{approaches}(a,m,t)\\
+&\qquad\land\neg\mathrm{occupies}(a,m,t).
 \end{aligned}
 $$
 
