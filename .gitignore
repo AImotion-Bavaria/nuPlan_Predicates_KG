@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# Conda / virtual environments
+.env
+.venv/
+venv/
+env/
+
+# Generated predicate outputs
+outputs/
+outputs_python/
+visual_inspection/
+
+# Dataset files
+*.db
+*.sqlite
+*.sqlite3
+
+# Large archives
+*.zip
+*.tar
+*.tar.gz
+
+# Python build
+build/
+dist/
+*.egg-info/

@@ -1,0 +1,16 @@
+# exact_scenarios.yaml
+
+scenario_types: null
+
+scenario_tokens:
+    - b880c406318b552f
+    - d0663ae55dab5cb2
+    - e7126245e4e25dd1
+
+log_names: null
+map_names: null
+
+num_scenarios_per_type: null
+limit_total_scenarios: null
+
+shuffle: false

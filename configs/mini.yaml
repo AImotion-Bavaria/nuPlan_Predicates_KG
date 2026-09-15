@@ -1,0 +1,32 @@
+dataset_root: ${NUPLAN_DATA_ROOT}
+map_root: ${NUPLAN_MAPS_ROOT}
+map_version: nuplan-maps-v1.0
+split: mini
+output_dir: outputs/mini
+max_scenarios: null
+sample_interval_s: 0.5
+history_horizon_s: 2.0
+future_horizon_s: 4.0
+spatial:
+  near_m: 10.0
+  interaction_m: 30.0
+  longitudinal_tolerance_m: 2.0
+  lateral_tolerance_m: 1.5
+  overlap_iou: 0.01
+motion:
+  stopped_speed_mps: 0.3
+  slow_speed_mps: 2.0
+  acceleration_threshold_mps2: 0.5
+  yaw_rate_threshold_rps: 0.08
+  lane_change_lateral_m: 1.2
+risk:
+  min_ttc_s: 0.0
+  critical_ttc_s: 2.0
+  caution_ttc_s: 4.0
+  min_distance_m: 2.0
+exports:
+  csv: true
+  parquet: true
+  rdf_turtle: true
+  owl_schema: true
+  jsonl: true
